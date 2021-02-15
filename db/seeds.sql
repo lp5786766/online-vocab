@@ -1,0 +1,1 @@
+insert into words(word, partSpeech, definition, book, author, sentence) values("dollop","noun", "a shapeless mass or blob of something, especially soft food.", "All Quiet on the Western Front", "Erich Maria Remarque", "The cook with his carroty headis begging us to eat; he beckons with his ladle to every one that passes, and spoons him out a great dollop.");
