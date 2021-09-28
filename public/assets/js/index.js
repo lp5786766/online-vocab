@@ -5,7 +5,7 @@ $(document).ready(function(){
 
   // This page will display:
 
-  // - Navbar (My Books, My languages)
+  // - Navbar (My Books, My languages) potentially the whole page is reflecting only one language
 
   // - Add a new word form (word, sentence, book, additional details)
 
