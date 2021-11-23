@@ -11,4 +11,7 @@ $(document).ready(function(){
 
   // - My recent words as cards (with collapsible info)
 
+  // HERE we can start by reading the words that are in the database already and create new cards for them
+  // ADD EDIT FUNCTION
+
   // - list of books/languages

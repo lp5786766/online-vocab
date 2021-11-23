@@ -13,13 +13,55 @@ const connection = mysql.createConnection({
 connection.connect(function (err) {
   if (err) throw err;
   console.log('connected as id ' + connection.threadId);
+//   addWord();
+  queryNouns();
   afterConnection();
 });
+
+//Add a word
+const addWord = () => {
+  connection.query(
+    'INSERT INTO words SET ?',
+    {
+      word: 'lustrous',
+      part_speech: "adjective",
+      definition: "having luster; shining",
+      book: "Billy Bud, Sailor",
+      author: "Herman Melville",
+      sentence: "It was a hot noon in July; and his face, lustrous with perspiration, beamed with barbaric good humor.",
+    },
+    (err, result) => {
+      if (err) {
+        throw err;
+      }
+    }
+  );
+};
+
+// Query only nouns
+function queryNouns() {
+  const query = connection.query(
+    'SELECT * FROM words WHERE part_speech=? AND book=?',
+    ['noun', 'All Quiet on the Western Front'],
+    (err, res) => {
+      if (err) throw err;
+      res.forEach((row) => {
+        console.log(row.id, row.word, row.book);
+      });
+    }
+  );
+  // logs the actual query being run
+  console.log(query.sql);
+}
 
 function afterConnection() {
   connection.query('SELECT * FROM words', function (err, res) {
     if (err) throw err;
     console.log(res);
+    //from this data you can choose individual rows
+    res.forEach((row) => {
+      console.log(row.word);
+    });
     connection.end();
   });
 }
