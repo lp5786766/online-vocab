@@ -14,7 +14,8 @@ connection.connect(function (err) {
   if (err) throw err;
   console.log('connected as id ' + connection.threadId);
   //   addWord();
-//   updateWord();
+  //   updateWord();
+  deleteWord();
   queryNouns();
   afterConnection();
 });
@@ -60,7 +61,7 @@ const updateWord = () => {
   );
 };
 
-// READ
+// READ (SELECT)
 // Query only nouns
 function queryNouns() {
   const query = connection.query(
@@ -87,4 +88,16 @@ function afterConnection() {
     });
     connection.end();
   });
+}
+
+const deleteWord = () => {
+    connection.query('DELETE FROM words WHERE ?', 
+    {
+        id: 3,
+    },
+     (err, result) => {
+        if (err) {
+            throw err;
+        }
+    });
 }
