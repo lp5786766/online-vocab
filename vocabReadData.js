@@ -13,22 +13,24 @@ const connection = mysql.createConnection({
 connection.connect(function (err) {
   if (err) throw err;
   console.log('connected as id ' + connection.threadId);
-//   addWord();
+  //   addWord();
+//   updateWord();
   queryNouns();
   afterConnection();
 });
 
-//Add a word
+//INSERT (CREATE)
 const addWord = () => {
   connection.query(
     'INSERT INTO words SET ?',
     {
       word: 'lustrous',
-      part_speech: "adjective",
-      definition: "having luster; shining",
-      book: "Billy Bud, Sailor",
-      author: "Herman Melville",
-      sentence: "It was a hot noon in July; and his face, lustrous with perspiration, beamed with barbaric good humor.",
+      part_speech: 'adjective',
+      definition: 'having luster; shining',
+      book: 'Billy Bud, Sailor',
+      author: 'Herman Melville',
+      sentence:
+        'It was a hot noon in July; and his face, lustrous with perspiration, beamed with barbaric good humor.',
     },
     (err, result) => {
       if (err) {
@@ -38,6 +40,27 @@ const addWord = () => {
   );
 };
 
+// UPDATE
+const updateWord = () => {
+  connection.query(
+    'UPDATE words SET ? WHERE ?',
+    [
+      {
+        author: 'Keren',
+      },
+      {
+        id: 2,
+      },
+    ],
+    (err, result) => {
+      if (err) {
+        throw err;
+      }
+    }
+  );
+};
+
+// READ
 // Query only nouns
 function queryNouns() {
   const query = connection.query(
