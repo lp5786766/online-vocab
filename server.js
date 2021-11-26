@@ -1,4 +1,22 @@
-var mysql = require('mysql');
+const express = require('express');
+const app = express();
+
+const PORT = process.env.PORT || 8080;
+
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+    res.send('stuff');
+});
+
+app.listen(PORT, () => {
+  console.log(`app is listening on port ${PORT}`);
+});
+
+
+
+
+const mysql = require('mysql');
 require('dotenv').config();
 
 const connection = mysql.createConnection({
