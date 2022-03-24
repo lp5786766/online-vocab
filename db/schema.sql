@@ -1,5 +1,5 @@
-DROP DATABASE IF EXISTS online_vocab;
-CREATE DATABASE online_vocab;
+-- DROP DATABASE IF EXISTS online_vocab;
+-- CREATE DATABASE online_vocab;
 USE online_vocab;
 
 CREATE TABLE words (

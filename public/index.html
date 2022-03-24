@@ -44,6 +44,7 @@
                 <option value="2">Verb</option>
                 <option value="3">Adjective</option>
                 <option value="4">Adverb</option>
+                <option value="5">Other</option>
               </select>
               <label>Part of Speech</label>
             </div>
@@ -90,16 +91,21 @@
         <h4>My Words</h4>
         <div class="col s3">
           <ul class="collapsible">
+           
+
             <li>
               <div class="collapsible-header">
-                <p class="my-words">Trepidation</p>
+                <p class="my-words" id="word" name ="word">Trepidation</p>
                 <p class="part-of-speech">noun</p>
               </div>
               <div class="collapsible-body">
-                <b>"The men set off in fear and trepidation"</b>
-                <p>Google dictionary <i>by Google</i></p>
+                <p class="definition">a feeling of fear or agitation about something that may happen</p>
+                <b class="sentence">"The men set off in fear and trepidation"</b>
+                <p class="book">Google dictionary <i class="author">by Google</i></p>
               </div>
             </li>
+
+
           </ul>
         </div>
       </div>
@@ -110,6 +116,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="assets/js/index.js"></script>
+    <script src="assets/js/getWord.js"></script>
+
   </body>
 </html>
