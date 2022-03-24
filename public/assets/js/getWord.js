@@ -5,13 +5,16 @@ const sentenceOutput = $('.sentence');
 const bookOutput = $('.book');
 const authorOutput = $('.author');
 
-$(document).ready(function () {
+
+const newWordInput = $('#new-word-input');
+
+$(document).ready( () => {
   $('.collapsible').collapsible();
   $('select').formSelect();
 
   let words = [];
   
-  // This function grabs posts from the database and updates the view
+  // This function grabs words from the database and updates the view
   const getWords = () => {
     $.get('/api/words', function (data) {
       console.log('Words', data);
@@ -21,6 +24,26 @@ $(document).ready(function () {
   getWords();
 
 });
+
+const addBtn = $('.add');
+addBtn.click ((event) => {
+  event.preventDefault();
+// alert('btn clicked');
+console.log(newWordInput.val().trim())
+});
+
+
+ // This function inserts a new todo into our database and then updates the view
+//  const saveWord = (event) => {
+//   event.preventDefault();
+//   const word = {
+//     text: $newItemInput.val().trim(),
+//     complete: false
+//   };
+
+//   $.post("/api/words", todo, getTodos);
+//   $newItemInput.val("");
+// }
 
 // This page will display:
 
