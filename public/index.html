@@ -38,13 +38,13 @@
               <label for="new_word">New Word</label>
             </div>
             <div class="input-field col s6">
-              <select>
+              <select id="part-speech-input" class="materialSelect">
                 <option value="" disabled selected>...</option>
-                <option value="1">Noun</option>
-                <option value="2">Verb</option>
-                <option value="3">Adjective</option>
-                <option value="4">Adverb</option>
-                <option value="5">Other</option>
+                <option>Noun</option>
+                <option>Verb</option>
+                <option>Adjective</option>
+                <option>Adverb</option>
+                <option>Other</option>
               </select>
               <label>Part of Speech</label>
             </div>
@@ -54,7 +54,7 @@
               <div class="row">
                 <div class="input-field col s12">
                   <textarea
-                    id="textarea1"
+                    id="sentence-input"
                     class="materialize-textarea"
                   ></textarea>
                   <label for="textarea1">The whole sentence</label>
@@ -65,7 +65,7 @@
           <div class="row">
             <div class="input-field col s6">
               <textarea
-                id="book"
+                id="book-input"
                 type="text"
                 class="materialize-textarea"
               ></textarea>
