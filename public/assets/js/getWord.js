@@ -5,10 +5,21 @@ const sentenceOutput = $('.sentence');
 const bookOutput = $('.book');
 const authorOutput = $('.author');
 
+// Input elements
+const addBtn = $('.add');
 const newWordInput = $('#new-word-input');
 const partSpeechInput = $('#part-speech-input');
 const sentenceInput = $('#sentence-input');
 const bookInput = $('#book-input');
+const definitionInput = $('#definition-input');
+const authorInput = $('#author-input');
+
+const getWords = () => {
+  $.get('/api/words', function (data) {
+    console.log('Words', data);
+    words = data;
+  });
+};
 
 $(document).ready(() => {
   $('.collapsible').collapsible();
@@ -17,16 +28,11 @@ $(document).ready(() => {
   let words = [];
 
   // This function grabs words from the database and updates the view
-  const getWords = () => {
-    $.get('/api/words', function (data) {
-      console.log('Words', data);
-      words = data;
-    });
-  };
+  
   getWords();
 });
 
-const addBtn = $('.add');
+
 addBtn.click((event) => {
   // prevent reloading while building, delete later
   event.preventDefault();
@@ -34,8 +40,25 @@ addBtn.click((event) => {
   console.log(partSpeechInput.val());
   console.log(sentenceInput.val());
   console.log(bookInput.val());
+  console.log(definitionInput.val());
+  console.log(authorInput.val());
+  insertWord();
 });
 
+
+const insertWord = () => {
+  const word = {
+    word: newWordInput.val().trim(),
+    partSpeech: partSpeechInput.val(),
+    definition: definitionInput.val().trim(),
+    book: bookInput.val().trim(),
+    author: authorInput.val().trim(),
+    sentence: sentenceInput.val().trim(),
+  }
+  $.post("/api/words", word, getWords);
+  console.log('word inserted!');
+
+}
 // This function inserts a new todo into our database and then updates the view
 //  const saveWord = (event) => {
 //   event.preventDefault();

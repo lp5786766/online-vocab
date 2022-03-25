@@ -27,9 +27,9 @@
       <!-- ADD A NEW WORD -->
       <div class="row">
         <h4>Add a new word</h4>
-        <form class="col s8">
+        <form class="col s12">
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s3">
               <textarea
                 id="new-word-input"
                 type="text"
@@ -37,7 +37,7 @@
               ></textarea>
               <label for="new_word">New Word</label>
             </div>
-            <div class="input-field col s6">
+            <div class="input-field col s3">
               <select id="part-speech-input" class="materialSelect">
                 <option value="" disabled selected>...</option>
                 <option>Noun</option>
@@ -48,6 +48,15 @@
               </select>
               <label>Part of Speech</label>
             </div>
+            <div class="input-field col s6">
+              <textarea
+              id="definition-input"
+              type="text"
+              class="materialize-textarea"
+            ></textarea>
+            <label for="definition">Definition</label>
+            </div>
+
           </div>
           <div class="row">
             <div class="col s12">
@@ -70,6 +79,14 @@
                 class="materialize-textarea"
               ></textarea>
               <label for="book">Which book is it from?</label>
+            </div>
+            <div class="input-field col s4">
+              <textarea
+                id="author-input"
+                type="text"
+                class="materialize-textarea"
+              ></textarea>
+              <label for="author">Author</label>
             </div>
 
             <div class="input-field col s2">
