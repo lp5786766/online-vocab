@@ -1,3 +1,5 @@
+$(document).ready(() => {
+
 const wordOutput = $('.my-words');
 const partSpeechOutput = $('.part-of-speech');
 const definitionOutput = $('.definition');
@@ -17,10 +19,12 @@ const authorInput = $('#author-input');
 // My words elements
 const myCardsArea = $('.word-cards');
 
-// Generate and display words from the db
+// Materialize js
+$('.collapsible').collapsible();
+$('select').formSelect();
+$('.tooltipped').tooltip();
 
-
-// GET all words
+let words = [];
 const getWords = () => {
   $.get('/api/words', function (data) {
     // console.log('Words', data);
@@ -40,7 +44,7 @@ const getWords = () => {
             <p class="my-words" name="word">${word.word}</p>
             <p class="part-of-speech">${word.partSpeech}</p>
           </div>
-          <div class="collapsible-body">
+          <div class="collapsible-body" style>
             <p class="definition">
               ${word.definition}
             </p>
@@ -48,7 +52,7 @@ const getWords = () => {
               >"${word.sentence}"</b
             >
             <p class="book">
-              Google dictionary <i class="author">by ${word.author}</i>
+              ${word.book} <i class="author">by ${word.author}</i>
             </p>
             <a
               class="waves-effect waves-light btn-small tooltipped light-green"
@@ -57,7 +61,8 @@ const getWords = () => {
               ><i class="material-icons">edit</i></a
             >
             <a
-              class="waves-effect waves-light btn-small tooltipped red lighten-1"
+              class="waves-effect waves-light btn-small tooltipped red lighten-1 delete"
+              id="delete-${word.id}"
               data-position="bottom"
               data-tooltip="Delete"
               ><i class="material-icons">delete_forever</i></a
@@ -68,11 +73,49 @@ const getWords = () => {
       );
   
       myCardsArea.prepend(wordCard);
+      $('.collapsible').collapsible();
+      $('.tooltipped').tooltip();
 
+      
+
+      // Delete word function
+      const deleteBtn = $('.delete');
+      const deleteWord = () => {
+
+        alert(`clicked ${word.id}`);
+      };
+      deleteBtn.on('click', deleteWord);
+      
+   
     });
     
   });
 };
+  // This function grabs words from the database and updates the view
+  
+  getWords();
+
+  
+
+  addBtn.click((event) => {
+    // prevent reloading while building, delete later
+    event.preventDefault();
+    insertWord();
+  });
+  
+ 
+
+ 
+// Generate and display words from the db
+
+
+// GET all words
+
+
+
+$('.tooltipped').tooltip();
+
+
 
 // POST a new word
 // TODO: present a quick confirmation form on 'add' click before saving the word to make sure there are no mistakes
@@ -88,25 +131,8 @@ const insertWord = () => {
   $.post("/api/words", word, getWords);
 }
 
-$(document).ready(() => {
-  $('.collapsible').collapsible();
-  $('select').formSelect();
-
-  $('.tooltipped').tooltip();
-
-  let words = [];
-
-  // This function grabs words from the database and updates the view
-  
-  getWords();
-});
 
 
-addBtn.click((event) => {
-  // prevent reloading while building, delete later
-  event.preventDefault();
-  insertWord();
-});
 
 
 // This function inserts a new todo into our database and then updates the view
@@ -134,3 +160,5 @@ addBtn.click((event) => {
 // ADD EDIT FUNCTION
 
 // - list of books/languages
+
+});
