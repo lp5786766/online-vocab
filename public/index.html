@@ -50,13 +50,12 @@
             </div>
             <div class="input-field col s6">
               <textarea
-              id="definition-input"
-              type="text"
-              class="materialize-textarea"
-            ></textarea>
-            <label for="definition">Definition</label>
+                id="definition-input"
+                type="text"
+                class="materialize-textarea"
+              ></textarea>
+              <label for="definition">Definition</label>
             </div>
-
           </div>
           <div class="row">
             <div class="col s12">
@@ -106,34 +105,55 @@
       <!-- MY WORDS -->
       <div class="row">
         <h4>My Words</h4>
-        <div class="col s3">
+        <div class="col s4">
           <ul class="collapsible">
-           
 
+            <!-- WORD ENTRY -->
             <li>
               <div class="collapsible-header">
-                <p class="my-words" id="word" name ="word">Trepidation</p>
+                <p class="my-words" id="word" name="word">Trepidation</p>
                 <p class="part-of-speech">noun</p>
               </div>
               <div class="collapsible-body">
-                <p class="definition">a feeling of fear or agitation about something that may happen</p>
-                <b class="sentence">"The men set off in fear and trepidation"</b>
-                <p class="book">Google dictionary <i class="author">by Google</i></p>
+                <p class="definition">
+                  a feeling of fear or agitation about something that may happen
+                </p>
+                <b class="sentence"
+                  >"The men set off in fear and trepidation"</b
+                >
+                <p class="book">
+                  Google dictionary <i class="author">by Google</i>
+                </p>
+                <a
+                  class="waves-effect waves-light btn-small tooltipped light-green"
+                  data-position="bottom"
+                  data-tooltip="Edit"
+                  ><i class="material-icons">edit</i></a
+                >
+                <a
+                  class="waves-effect waves-light btn-small tooltipped red lighten-1"
+                  data-position="bottom"
+                  data-tooltip="Delete"
+                  ><i class="material-icons">delete_forever</i></a
+                >
               </div>
             </li>
-
+            <!-- WORD ENTRY END-->
 
           </ul>
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://kit.fontawesome.com/26b6718224.js"
       crossorigin="anonymous"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="assets/js/getWord.js"></script>
-
   </body>
 </html>

@@ -14,6 +14,7 @@ const bookInput = $('#book-input');
 const definitionInput = $('#definition-input');
 const authorInput = $('#author-input');
 
+// GET all words
 const getWords = () => {
   $.get('/api/words', function (data) {
     console.log('Words', data);
@@ -21,9 +22,25 @@ const getWords = () => {
   });
 };
 
+// POST a new word
+// TODO: present a quick confirmation form on 'add' click before saving the word to make sure there are no mistakes
+const insertWord = () => {
+  const word = {
+    word: newWordInput.val().trim(),
+    partSpeech: partSpeechInput.val(),
+    definition: definitionInput.val().trim(),
+    book: bookInput.val().trim(),
+    author: authorInput.val().trim(),
+    sentence: sentenceInput.val().trim(),
+  }
+  $.post("/api/words", word, getWords);
+}
+
 $(document).ready(() => {
   $('.collapsible').collapsible();
   $('select').formSelect();
+
+  $('.tooltipped').tooltip();
 
   let words = [];
 
@@ -36,29 +53,10 @@ $(document).ready(() => {
 addBtn.click((event) => {
   // prevent reloading while building, delete later
   event.preventDefault();
-  console.log(newWordInput.val().trim());
-  console.log(partSpeechInput.val());
-  console.log(sentenceInput.val());
-  console.log(bookInput.val());
-  console.log(definitionInput.val());
-  console.log(authorInput.val());
   insertWord();
 });
 
 
-const insertWord = () => {
-  const word = {
-    word: newWordInput.val().trim(),
-    partSpeech: partSpeechInput.val(),
-    definition: definitionInput.val().trim(),
-    book: bookInput.val().trim(),
-    author: authorInput.val().trim(),
-    sentence: sentenceInput.val().trim(),
-  }
-  $.post("/api/words", word, getWords);
-  console.log('word inserted!');
-
-}
 // This function inserts a new todo into our database and then updates the view
 //  const saveWord = (event) => {
 //   event.preventDefault();
