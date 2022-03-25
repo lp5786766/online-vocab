@@ -14,11 +14,63 @@ const bookInput = $('#book-input');
 const definitionInput = $('#definition-input');
 const authorInput = $('#author-input');
 
+// My words elements
+const myCardsArea = $('.word-cards');
+
+// Generate and display words from the db
+
+
 // GET all words
 const getWords = () => {
   $.get('/api/words', function (data) {
-    console.log('Words', data);
+    // console.log('Words', data);
     words = data;
+
+    // loop over the words array and create a card for Each
+    console.log(words);
+    // myCardsArea.empty();
+    // var wordsToAdd = [];
+
+    words.forEach((word, i) => {
+      console.log(i, word.word);
+      const wordCard = $(
+        `<ul class="collapsible col s4">
+        <li>
+          <div class="collapsible-header">
+            <p class="my-words" name="word">${word.word}</p>
+            <p class="part-of-speech">${word.partSpeech}</p>
+          </div>
+          <div class="collapsible-body">
+            <p class="definition">
+              ${word.definition}
+            </p>
+            <b class="sentence"
+              >"${word.sentence}"</b
+            >
+            <p class="book">
+              Google dictionary <i class="author">by ${word.author}</i>
+            </p>
+            <a
+              class="waves-effect waves-light btn-small tooltipped light-green"
+              data-position="bottom"
+              data-tooltip="Edit"
+              ><i class="material-icons">edit</i></a
+            >
+            <a
+              class="waves-effect waves-light btn-small tooltipped red lighten-1"
+              data-position="bottom"
+              data-tooltip="Delete"
+              ><i class="material-icons">delete_forever</i></a
+            >
+          </div>
+        </li>
+      </ul>`
+      );
+  
+      myCardsArea.prepend(wordCard);
+
+    });
+    
   });
 };
 
