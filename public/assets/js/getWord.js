@@ -18,19 +18,14 @@ const authorInput = $('#author-input');
 const myCardsArea = $('.word-cards');
 const deleteBtn = $('.delete');
 
+// GET words to display on the page
 const getWords = () => {
   let words = [];
-  $.get('/api/words', function (data) {
-    // console.log('Words', data);
+  $.get('/api/words', (data) => {
     words = data;
-
-    // loop over the words array and create a card for Each
-    console.log(words);
     myCardsArea.empty();
-    
-
+    // loop over the words array and create a card for Each
     words.forEach((word, i) => {
-      console.log(i, word.word);
       const wordCard = $(
         `<ul class="collapsible col s4">
       <li>
@@ -65,7 +60,6 @@ const getWords = () => {
       </li>
     </ul>`
       );
-
       myCardsArea.prepend(wordCard);
       $('.collapsible').collapsible();
       $('.tooltipped').tooltip();
@@ -73,18 +67,60 @@ const getWords = () => {
   });
 };
 
+
+
+
 $(document).ready(() => {
   // Materialize js
   $('.collapsible').collapsible();
   $('select').formSelect();
   $('.tooltipped').tooltip();
 
+
+ 
+
+ 
+
   // This function grabs words from the database and updates the view
   getWords();
 
-  // Generate and display words from the db
 
-  // GET all words
+
+// POST a new word
+// TODO: present a quick confirmation form on 'add' click before saving the word to make sure there are no mistakes
+const insertWord = () => {
+  const word = {
+    word: newWordInput.val().trim(),
+    partSpeech: partSpeechInput.val(),
+    definition: definitionInput.val().trim(),
+    book: bookInput.val().trim(),
+    author: authorInput.val().trim(),
+    sentence: sentenceInput.val().trim(),
+  };
+  $.post('/api/words', word, getWords);
+};
+addBtn.click((event) => {
+  // prevent reloading while building, delete later
+  event.preventDefault();
+  insertWord();
+
+});
+
+// DELETE
+// TODO: add confirmation prompt
+function deleteWord(event) {
+  event.stopPropagation();
+
+  const wordId = this.id;
+  
+  $.ajax({
+    method: 'DELETE',
+    url: '/api/words/' + wordId,
+    // TODO reload for now, but in the future, fix tool tip hanging
+  }).then(location.reload());
+  }
+  $(document).on('click', 'a.delete', deleteWord);
+
 
   $('.tooltipped').tooltip();
 
@@ -115,34 +151,10 @@ $(document).ready(() => {
   // - list of books/languages
 });
 
-addBtn.click((event) => {
-  // prevent reloading while building, delete later
-  event.preventDefault();
-  insertWord();
-  // alert('add clicked');
-});
 
-$(document).on('click', 'a.delete', deleteWord);
 
-const deleteWord = (event) => {
-  event.stopPropagation();
-  const wordId = this.id;
-  $.ajax({
-    method: 'DELETE',
-    url: '/api/words/' + wordId,
-  }).then(getWords);
-}
 
-// POST a new word
-// TODO: present a quick confirmation form on 'add' click before saving the word to make sure there are no mistakes
-const insertWord = () => {
-  const word = {
-    word: newWordInput.val().trim(),
-    partSpeech: partSpeechInput.val(),
-    definition: definitionInput.val().trim(),
-    book: bookInput.val().trim(),
-    author: authorInput.val().trim(),
-    sentence: sentenceInput.val().trim(),
-  };
-  $.post('/api/words', word, getWords);
-};
+
+
+
+
