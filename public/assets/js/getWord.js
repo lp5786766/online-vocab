@@ -26,8 +26,8 @@ const getWords = () => {
 
     // loop over the words array and create a card for Each
     console.log(words);
-    // myCardsArea.empty();
-    // var wordsToAdd = [];
+    myCardsArea.empty();
+    
 
     words.forEach((word, i) => {
       console.log(i, word.word);
@@ -56,7 +56,7 @@ const getWords = () => {
           >
           <a
             class="waves-effect waves-light btn-small tooltipped red lighten-1 delete"
-            id="delete-${word.id}"
+            id="${word.id}"
             data-position="bottom"
             data-tooltip="Delete"
             ><i class="material-icons">delete_forever</i></a
@@ -69,14 +69,10 @@ const getWords = () => {
       myCardsArea.prepend(wordCard);
       $('.collapsible').collapsible();
       $('.tooltipped').tooltip();
-
-      // DELETE word function
-      // const deleteWord = () => {
-      //   alert(`clicked`);
-      // };
     });
   });
 };
+
 $(document).ready(() => {
   // Materialize js
   $('.collapsible').collapsible();
@@ -91,20 +87,6 @@ $(document).ready(() => {
   // GET all words
 
   $('.tooltipped').tooltip();
-
-  // POST a new word
-  // TODO: present a quick confirmation form on 'add' click before saving the word to make sure there are no mistakes
-  const insertWord = () => {
-    const word = {
-      word: newWordInput.val().trim(),
-      partSpeech: partSpeechInput.val(),
-      definition: definitionInput.val().trim(),
-      book: bookInput.val().trim(),
-      author: authorInput.val().trim(),
-      sentence: sentenceInput.val().trim(),
-    };
-    $.post('/api/words', word, getWords);
-  };
 
   // This function inserts a new todo into our database and then updates the view
   //  const saveWord = (event) => {
@@ -135,11 +117,32 @@ $(document).ready(() => {
 
 addBtn.click((event) => {
   // prevent reloading while building, delete later
-  // event.preventDefault();
-  // insertWord();
-  alert('add clicked');
+  event.preventDefault();
+  insertWord();
+  // alert('add clicked');
 });
 
-$(document).on('click', 'a.delete', () => {
-  alert(`delete ${this.id} clicked`); // jQuery 1.4.3+
-});
+$(document).on('click', 'a.delete', deleteWord);
+
+const deleteWord = (event) => {
+  event.stopPropagation();
+  const wordId = this.id;
+  $.ajax({
+    method: 'DELETE',
+    url: '/api/words/' + wordId,
+  }).then(getWords);
+}
+
+// POST a new word
+// TODO: present a quick confirmation form on 'add' click before saving the word to make sure there are no mistakes
+const insertWord = () => {
+  const word = {
+    word: newWordInput.val().trim(),
+    partSpeech: partSpeechInput.val(),
+    definition: definitionInput.val().trim(),
+    book: bookInput.val().trim(),
+    author: authorInput.val().trim(),
+    sentence: sentenceInput.val().trim(),
+  };
+  $.post('/api/words', word, getWords);
+};
